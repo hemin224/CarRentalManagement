@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using CarRentalManagement.Data;
 using CarRentalManagement.Configurations.Entities;
+using CarRentalManagement.Components.Layout.Domain;
 
 namespace CarRentalManagement.Data
 {
@@ -13,13 +14,19 @@ namespace CarRentalManagement.Data
         public DbSet<CarRentalManagement.Components.Layout.Domain.Customer> Customer { get; set; } = default!;
         public DbSet<CarRentalManagement.Components.Layout.Domain.Vehicle> Vehicle { get; set; } = default!;
 
-        public DbSet<CarRentalManagement.Components.Layout.Domain.Model> Model { get; set; } = default!;
+        public DbSet<CarRentalManagement.Components.Layout.Domain.Model> Model{ get; set; } = default!;
+
+
+
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
             builder.ApplyConfiguration(new ColourSeed());
             builder.ApplyConfiguration(new MakeSeed());
             builder.ApplyConfiguration(new ModelSeed());
+            builder.ApplyConfiguration(new RoleSeed());
+            builder.ApplyConfiguration(new UserRoleSeed());
+            builder.ApplyConfiguration(new UserSeed());
         }
     }
 }
